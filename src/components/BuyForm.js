@@ -14,53 +14,35 @@ class BuyForm extends Component {
   render() {
     const countBuyCI = (val) => {
       var ethetovalue= this.props.parentState.imagesCount;
-      console.log('countBuyCIethetovalue....',ethetovalue);
       var addtokenperbusd= val + ethetovalue;
-      var userInput = addtokenperbusd;
-      var max = Math.floor(userInput / 1000);
-      var actualPercentage = 0.01;
-      var convertednumber = 0;
+      var actualPercentage = 0;
+      var percentVal = [];
       var totalSum = 0;
-      if (userInput === 1000) {
-        totalSum = 1000 / 0.01;
-      } else {
-        if (userInput >= 1) {
-          if (userInput <= 1000) {
-            totalSum = userInput / 0.01;
-          } else {
-            totalSum = 1000 / 0.01;
+      var calcList = [];
+      if(addtokenperbusd){
+          var modVal = addtokenperbusd%1000;
+          var currentVal = addtokenperbusd - modVal;
+          calcList.push(modVal > val ? val : modVal);
+          while(addtokenperbusd > 0){
+              actualPercentage = actualPercentage === 0 ? 0.01 : (actualPercentage + ((0.001 / 100) * actualPercentage));
+              percentVal.push(actualPercentage);
+              if((currentVal > ethetovalue) && (ethetovalue > (currentVal - 1000))){
+                  calcList.push(currentVal - ethetovalue);
+              } else if(currentVal > ethetovalue){
+                  calcList.push(1000)
+              }
+              currentVal -= 1000;
+              addtokenperbusd -= 1000;
           }
-        }
-        if (max === 0) {
-          convertednumber = userInput / 0.01;
-        } else {
-          for (var i = 0; i < max; i++) {
-            if (userInput % 1000 === 0) {
-              if (i != 1) {
-                actualPercentage = actualPercentage + ((0.001 / 100) * actualPercentage);
-              } else {
-
-              }
-            } else {
-              actualPercentage = actualPercentage + ((0.001 / 100) * actualPercentage);
-            }
-            if (userInput % 1000 === 0) {
-              if (i != 1) {
-                totalSum += (1000) / actualPercentage;
-              } else {
-              }
-            } else {
-              if (i === max - 1) {
-                totalSum += (userInput % 1000) / actualPercentage;
-
-              } else {
-                totalSum += (1000) / actualPercentage;
-              }
-            }
-          }
-          convertednumber = userInput / actualPercentage;
-        }
+          // calcList.reverse();
+          console.log(calcList, percentVal)
       }
+      var percentlen = percentVal.length;
+      calcList.forEach(function(val, index){
+          console.log(val/percentVal[percentlen-index-1]);
+          totalSum += (val/percentVal[percentlen-index-1]);
+          console.log('totalSum',totalSum);
+      })
       return totalSum;
     }
     const busdCalculation = (value) => {

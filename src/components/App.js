@@ -28,7 +28,6 @@ class App extends Component {
 			x = (busdAmount * 10 ** 18).toString();
 			let z = new BigNumber(x);
 			let a = z.toFixed();
-			
 			//  let z = new BigNumber(x);
 			// z.toString();// "1.111222233334444555566e+21"// z.toFixed();// console.log(z);
 			this.state.BUSDContract.methods
@@ -63,7 +62,7 @@ class App extends Component {
 				.send({ from: this.state.account })
 				.on("transactionHash", (hash) => {
 					this.state.BUSDSwap.methods
-						.sellTokens(tokenAmount.toString())
+						.ultaSell((tokenAmount * 10 ** 18).toString())
 						.send({ from: this.state.account })
 						.on("transactionHash", (hash) => {
 							this.setState({ loading: false });
@@ -101,7 +100,6 @@ class App extends Component {
 		}
 		const loadBlockchainData = async () => {
 			try {
-				
 				const web3 = window.web3;
 				// Load BUSD contract
 				const BUSDContract = await new web3.eth.Contract(BUSDABi, BUSDAddress);
@@ -118,12 +116,12 @@ class App extends Component {
 				this.setState({ account: accounts[0] });
 
 
-				const imagesCount =await BUSDSwap.methods.tokensPerBUSD().call();
-				const a= parseInt(imagesCount)
-				const ethtovalue= (a/10**18)
-				console.log("imagesCount......",a)
-				
-				this.setState({imagesCount: ethtovalue})
+				const imagesCount = await BUSDSwap.methods.totalBUSDSale().call();
+				const a = parseInt(imagesCount)
+				// const ethtovalue = (a / 10 ** 18)
+				console.log("imagesCount......", a)
+
+				this.setState({ imagesCount: a })
 
 				// Set user BUSD balance
 				let busdBalance = await BUSDContract.methods.balanceOf(this.state.account).call();
@@ -135,11 +133,8 @@ class App extends Component {
 
 			} catch (error) {
 				console.log();
-
 			}
-
 		}
-
 		const loadWeb3 = async () => {
 			// Modern dapp browsers...
 			if (window.ethereum) {
@@ -160,7 +155,7 @@ class App extends Component {
 				})
 			}
 		}
-		console.log("this.state.imagesCount....",this.state.imagesCount);
+		console.log("this.state.imagesCount....", this.state.imagesCount);
 		return (
 			<div>
 				<BrowserRouter>
