@@ -4,12 +4,14 @@ import Earn from "./Navigation/Earn"
 import Nft from "./Navigation/Nft"
 import Trade from "./Navigation/Trade"
 import NavBar from "./Navigation/NavBar";
+import frontend from "./Frontend";
 import Win from "./Navigation/Win"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Swap from "./Swap/Swap";
 import "./App.css";
 import { BigNumber } from "bignumber.js";
 import Swal from "sweetalert2";
+import Frontend from "./Frontend";
 const BUSDSwapAddress = "0xc40D22Ca71d9CDde182815CdB43b997d1A1Ba574";
 const TokenAddress = "0x4B8426746334a1c3AeE5d38316547BC2e81c4116";
 const BUSDAddress = "0x1C3E3DF567986DdbE5bf2f4dd63934A495f0041c";
@@ -49,7 +51,6 @@ class App extends Component {
 			})
 		}
 	};
-
 	sellTokens = async (tokenAmount) => {
 		try {
 			this.setState({ loading: true });
@@ -62,7 +63,7 @@ class App extends Component {
 				.send({ from: this.state.account })
 				.on("transactionHash", (hash) => {
 					this.state.BUSDSwap.methods
-						.ultaSell((tokenAmount * 10 ** 18).toString())
+						.ultaSell(c.toString())
 						.send({ from: this.state.account })
 						.on("transactionHash", (hash) => {
 							this.setState({ loading: false });

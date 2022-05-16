@@ -31,11 +31,11 @@ class Main extends Component {
 				/>
 			);
 		return (
-			<div
-				// className="mt-2"
-				style={{ width: "100%", height: "300%", backgroundImage: "url(./images/Background.jpg)", marginTop: "1px", backgroundSize: "cover", backgroundPosition: "fixed" }}>
+			// <div
+			// 	// className="mt-2"
+			// 	style={{ width: "100%", height: "300%", backgroundImage: "url(./images/Background.jpg)", marginTop: "1px", backgroundSize: "cover", backgroundPosition: "fixed" }}>
 				<div id="content" className="mt-">
-					<div className="d-flex justify-content-center mb-3 ml-5">
+					{/* <div className="d-flex justify-content-center mb-3 ml-5">
 						<div style={{ width: "100%", height: "auto", display: "grid", justifyContent: "center", position: "relative", left: "230px", marginTop: "30px" }}>
 							<button style={{ width: "160px", height: "45px", backgroundColor: "#5c2171", borderRadius: "10px", fontSize: "17px", fontWeight: "bolder", color: "white", outline: "none", textDecoration: "none", border: "none", }} className="mb-2 mr-200"
 								onClick={(event) => {
@@ -45,7 +45,7 @@ class Main extends Component {
 								Swap
 							</button>
 						</div>
-						{/* <span>&lt; &nbsp; &gt;</span> */}
+						<span>&lt; &nbsp; &gt;</span>
 						<div style={{ width: "100%", height: "auto", display: "grid", justifyContent: "Center", marginRight: "300px", marginTop: "30px" }}>
 							<button style={{ width: "150px", height: "45px", backgroundColor: "silver", borderRadius: "10px", fontSize: "17px", fontWeight: "bolder", color: "white", border: "none", }} className="mb-2 ml-5"
 								onClick={(event) => {
@@ -55,12 +55,12 @@ class Main extends Component {
 								Liquidity
 							</button>
 						</div>
-					</div>
+					</div> */}
 					<div>
 						<div className="card-body">{content}</div>
 					</div>
 				</div>
-			</div>
+			// </div>
 		);
 	}
 }
